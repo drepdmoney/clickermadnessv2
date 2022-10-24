@@ -1,0 +1,273 @@
+-- DO NOT EDIT THIS UNTIL YOU KNOW EVERY FEATURE YOU ADD IS STABLE.
+-- DO NOT EDIT THIS UNTIL YOU KNOW EVERY FEATURE YOU ADD IS STABLE.
+-- DO NOT EDIT THIS UNTIL YOU KNOW EVERY FEATURE YOU ADD IS STABLE.
+-- DO NOT EDIT THIS UNTIL YOU KNOW EVERY FEATURE YOU ADD IS STABLE.
+-- DO NOT EDIT THIS UNTIL YOU KNOW EVERY FEATURE YOU ADD IS STABLE.
+-- DO NOT EDIT THIS UNTIL YOU KNOW EVERY FEATURE YOU ADD IS STABLE.
+
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+local Window = Library.CreateLib("Dreps Hub | Clicker Madness", "DarkTheme")
+
+local FarmTab = Window:NewTab("Farm")
+
+local FarmSection = FarmTab:NewSection("Clicks and Rebirths")
+
+FarmSection:NewToggle("Auto Click", "Automatically Clicks for you", function(state)
+    if state then
+        getgenv().autoClick = true
+
+spawn(function()
+    while getgenv().autoClick == true do
+local clickMod = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.Aero.Controllers.UI.Click)
+clickMod:Click()
+wait()
+end
+end)
+    else
+        getgenv().autoClick = false
+
+        spawn(function()
+            while getgenv().autoClick == true do
+                local clickMod = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.Aero.Controllers.UI.Click)
+                clickMod:Click()
+        wait()
+        end
+        end)
+    end
+end)
+
+
+FarmSection:NewToggle("Auto Rebirth", "Automatically Rebirths for you", function(state)
+    if state then
+        getgenv().autoRebirth = true
+        spawn (function()
+        
+            while getgenv().autoRebirth == true do
+            local args = {
+            [1] = 1000
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.RebirthService.BuyRebirths:FireServer(unpack(args))
+        
+        wait()
+        end
+        end)
+    else
+        getgenv().autoRebirth  = false
+spawn (function()
+
+    while getgenv().autoRebirth == true do
+    local args = {
+    [1] = 1000
+}
+
+game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.RebirthService.BuyRebirths:FireServer(unpack(args))
+
+wait()
+end
+end)
+    end
+end)
+
+
+
+local LocalTab = Window:NewTab("Local Player")
+
+local LocalSection = LocalTab:NewSection("Teleports")
+
+   
+-- walkspeed and jump power start here
+
+
+
+local PlayerSection = LocalTab:NewSection("Player")
+
+PlayerSection:NewLabel("Hard to see but there is a slider.")
+
+PlayerSection:NewSlider("WalkSpeed", "Go fast", 500, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+PlayerSection:NewSlider("Jumppower", "Jump high", 350, 50, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+
+PlayerSection:NewButton("Reset JumpPower/WalkSpeed", "Resets jump and walk to normal speed.", function()
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end)
+-- walkspeed/jumppower ends here
+
+
+
+
+
+
+LocalSection:NewDropdown("Teleport Islands 1", "Teleport to Islands", {"Lava Island","Desert Island","Winter Island"}, function(SelectedLocation)
+
+    if SelectedLocation == "Lava Island" then
+        
+            function teleportTO(placeCFrame)  -- teleport script
+                local plyr = game.Players.LocalPlayer
+                if plyr.Character then
+                 plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                end
+            end
+            teleportTO(game:GetService("Workspace").Worlds.Lava.Teleport.CFrame)
+    elseif SelectedLocation == "Desert Island" then
+        function teleportTO(placeCFrame)  -- teleport script
+            local plyr = game.Players.LocalPlayer
+            if plyr.Character then
+             plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+            end
+        end
+        teleportTO(game:GetService("Workspace").Worlds.Desert.Teleport.CFrame)
+    elseif SelectedLocation == "Winter Island" then
+        function teleportTO(placeCFrame)  -- teleport script
+            local plyr = game.Players.LocalPlayer
+            if plyr.Character then
+             plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+            end
+        end
+        teleportTO(game:GetService("Workspace").Worlds.Winter.Teleport.CFrame)
+        end
+    end)
+
+
+
+    
+    
+        LocalSection:NewDropdown("Teleport Islands 2", "Teleport to Islands", {"Toxic Island","Ocean Island","Candy Island"}, function(SelectedLocation)
+            if SelectedLocation == "Toxic Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Toxic.Teleport.CFrame)
+            elseif SelectedLocation == "Ocean Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Ocean.Teleport.CFrame)
+            elseif SelectedLocation == "Candy Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Candy.Teleport.CFrame)
+            end
+         end)
+         LocalSection:NewDropdown("Teleport Islands 3", "Teleport to Islands", {"Space Island","Forest Island","City Island"}, function(SelectedLocation)
+            if SelectedLocation == "Space Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Space.Teleport.CFrame)
+            elseif SelectedLocation == "Forest Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Forest.Teleport.CFrame)
+            elseif SelectedLocation == "City Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.City.Teleport.CFrame)
+            end
+         end)
+         LocalSection:NewDropdown("Teleport Islands 4", "Teleport to Islands", {"Blocks Island","Future Island","Infinity Island"}, function(SelectedLocation)
+            if SelectedLocation == "Blocks Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Blocks.Teleport.CFrame)
+            elseif SelectedLocation == "Future Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Future.Teleport.CFrame)
+            elseif SelectedLocation == "Infinity Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Infinity.Teleport.CFrame)
+            end
+         end)
+
+         LocalSection:NewDropdown("Teleport Islands 5", "Teleport to Islands", {"Moon Island","Fire Island","Storm Island"}, function(SelectedLocation)
+            if SelectedLocation == "Moon Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Moon.Teleport.CFrame)
+            elseif SelectedLocation == "Fire Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Fire.Teleport.CFrame)
+            elseif SelectedLocation == "Storm Island" then
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Storm.Teleport.CFrame)
+            end
+         end)
+      LocalSection:NewDropdown("Teleport Islands 6", "Teleport to Islands", {"Dominus Island"}, function(SelectedLocation)
+            if SelectedLocation == "Dominus Island" then
+
+              
+                function teleportTO(placeCFrame)  -- teleport script
+                    local plyr = game.Players.LocalPlayer
+                    if plyr.Character then
+                     plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+                    end
+                end
+                teleportTO(game:GetService("Workspace").Worlds.Dominus.Teleport.CFrame)
+            end
+         end)
+
+
+         local SettingsTab = Window:NewTab("Settings")
+
+         local UISection = SettingsTab:NewSection("Toggle GUI")
+
+         -- Click to Toggle UI 
+         UISection:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.RightControl, function()
+            Library:ToggleUI()
+        end)
